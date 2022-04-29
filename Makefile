@@ -45,6 +45,10 @@ composer-install:
 test:
 	@docker-compose exec php_container make run-tests
 
+## analyse:	Executes phpstan
+analyse:
+	@docker-compose exec php_container ./vendor/bin/phpstan analyse
+
 ## run-tests:	Run all tests
 run-tests:
 	XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-text --exclude-group='disabled' --log-junit build/test_results/phpunit/junit.xml tests

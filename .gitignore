@@ -12,6 +12,7 @@
 
 ###> phpunit/phpunit ###
 /build
-/phpunit.xml
+/reports
+/.phpunit.cache
 .phpunit.result.cache
 ###< phpunit/phpunit ###
