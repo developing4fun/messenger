@@ -3,7 +3,8 @@
   "autoload": {
     "psr-4": {
       "Shared\\": "src/Shared",
-      "SymfonyClient\\": "apps/SymfonyClient/src"
+      "SymfonyClient\\": "apps/SymfonyClient/src",
+      "Library\\": "src/Library"
     }
   },
   "autoload-dev": {
