@@ -30,7 +30,8 @@
     "lambdish/phunctional": "^2.1",
     "ramsey/uuid": "^4.2",
     "symfony/serializer": "^5.3",
-    "symfony/property-access": "^5.3"
+    "symfony/property-access": "^5.3",
+    "ext-amqp": "*"
   },
   "scripts": {
     "auto-scripts": {
