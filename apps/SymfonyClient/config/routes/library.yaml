@@ -1,0 +1,4 @@
+createUser:
+  path: /users
+  controller: SymfonyClient\Controller\Library\CreateUserController
+  methods: [POST]
