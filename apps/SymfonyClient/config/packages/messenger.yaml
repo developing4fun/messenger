@@ -32,8 +32,19 @@ framework:
 #          queues:
 #            increment_counter_on_user_created:
 #              binding_keys: [user.created]
-
+      create-external-user:
+        dsn: '%env(RABBITMQ_URL)%'
+        serializer: command_serializer
+        options:
+          auto_setup: true
+          exchange:
+            name: '%env(RABBITMQ_EXCHANGE_CMD)%'
+            type: topic
+          queues:
+            create_user_from_legacy:
+              binding_keys: [user.created]
     serializer:
       default_serializer: Shared\Infrastructure\Symfony\Bus\Serializer\SymfonyMessageSerializer
     routing:
       Library\User\Domain\Event\UserCreated: create-user
+      Library\User\Application\CreateExternalUser\CreateExternalUserCommand: create-external-user

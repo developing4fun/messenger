@@ -54,3 +54,7 @@ services:
         tags:
             - { name: serializer.normalizer }
 
+    # Custom serializers
+    command_serializer:
+        class: Shared\Infrastructure\Symfony\Bus\Serializer\SymfonyCommandSerializer
+
