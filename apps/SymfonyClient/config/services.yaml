@@ -27,6 +27,10 @@ services:
         arguments:
             $bus: '@query.bus'
 
+    Shared\Infrastructure\Symfony\Bus\Event\SymfonyEventBus:
+        arguments:
+            $bus: '@async.event.bus'
+
     Shared\Infrastructure\Symfony\Controller\ApiExceptionListener:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onException }
@@ -39,16 +43,14 @@ services:
             tags:
                 - { name: messenger.message_handler, bus: query.bus }
 
+        Shared\Domain\Bus\Event\DomainEventSubscriber:
+            tags:
+                - { name: messenger.message_handler, bus: async.event.bus }
+                - 'domain.event.subscriber'
+
     # Loads this specific normalizer to the serializer component
     property_normalizer:
         class: Symfony\Component\Serializer\Normalizer\PropertyNormalizer
         tags:
             - { name: serializer.normalizer }
-
-framework:
-    messenger:
-        default_bus: command.bus
-        buses:
-            command.bus:
-            query.bus:
 

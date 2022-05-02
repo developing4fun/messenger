@@ -45,7 +45,12 @@ final class UserCreated extends DomainEvent
     public function toPrimitives(): array
     {
         return [
-            'userName' => $this->userName,
+            'aggregateId' => $this->aggregateId(),
+            'body' => [
+                'userName' => $this->userName,
+                ],
+            'eventId' => $this->eventId(),
+            'occurredOn' => $this->occurredOn()
         ];
     }
 

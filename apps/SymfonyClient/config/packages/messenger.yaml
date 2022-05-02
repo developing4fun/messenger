@@ -1,0 +1,39 @@
+framework:
+  messenger:
+    default_bus: command.bus
+    buses:
+      command.bus:
+      query.bus:
+      async.event.bus:
+        default_middleware: allow_no_handlers
+
+    transports:
+      # TODO: failure transports
+      create-user:
+        dsn: '%env(RABBITMQ_URL)%'
+        options:
+          auto_setup: true # false: prevents messenger to create exchanges and queues by its own
+          exchange:
+            name: '%env(RABBITMQ_EXCHANGE)%'
+            type: topic
+          queues:
+            generate_coupon_on_user_created:
+              binding_keys: [user.created]
+            increment_counter_on_user_created:
+              binding_keys: [user.created]
+
+#      increment-counter:
+#        dsn: '%env(RABBITMQ_URL)%'
+#        options:
+#          auto_setup: true # false: prevents messenger to create exchanges and queues by its own
+#          exchange:
+#            name: '%env(RABBITMQ_EXCHANGE)%'
+#            type: topic
+#          queues:
+#            increment_counter_on_user_created:
+#              binding_keys: [user.created]
+
+    serializer:
+      default_serializer: Shared\Infrastructure\Symfony\Bus\Serializer\SymfonyMessageSerializer
+    routing:
+      Library\User\Domain\Event\UserCreated: create-user

@@ -9,11 +9,13 @@ use Library\User\Domain\User;
 use Library\User\Domain\UserId;
 use Library\User\Domain\UserName;
 use Library\User\Domain\UserRepository;
+use Shared\Domain\Bus\Event\EventBus;
 
 final class CreateUser
 {
     public function __construct(
-        private UserRepository $userRepository
+        private UserRepository $userRepository,
+        private EventBus $eventBus
     ) {}
 
     public function __invoke(
@@ -27,5 +29,7 @@ final class CreateUser
         }
 
         $this->userRepository->save($user);
+
+        $this->eventBus->publish(...$user->pullDomainEvents());
     }
 }

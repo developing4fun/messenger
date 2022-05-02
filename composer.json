@@ -31,7 +31,8 @@
     "ramsey/uuid": "^4.2",
     "symfony/serializer": "^5.3",
     "symfony/property-access": "^5.3",
-    "ext-amqp": "*"
+    "ext-amqp": "*",
+    "symfony/amqp-messenger": "^5.3"
   },
   "scripts": {
     "auto-scripts": {
